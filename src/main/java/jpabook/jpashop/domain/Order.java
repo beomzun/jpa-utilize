@@ -48,5 +48,19 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문상태 [ORDER, CANCEL]
 
+    //연관관계 편의 메서드 - 한 필드를 수정하거나 추가할 경우, 양쪽에서 수정해야 하는 것을 메서드 하나로 관리
+    public void setMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this);
+    }
 
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 }
