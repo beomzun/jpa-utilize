@@ -2,6 +2,7 @@ package jpabook.jpashop.domain;
 
 import static jakarta.persistence.FetchType.*;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -33,10 +34,12 @@ public class Order {
     @JoinColumn(name = "member_id")     //매핑을 뭐로 할건지 표시. FK명이 member_id로 설정됨
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    //cascade_ALL : 모든 엔티티는 각 엔티티마다 persist해서 영속성을 관리.
+    //ALL 설정 시  persist(orderItemA),persist(orderItemB)..persist(order) 다 하는 대신 persist(order)만 하면 연쇄적으로 동작
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
