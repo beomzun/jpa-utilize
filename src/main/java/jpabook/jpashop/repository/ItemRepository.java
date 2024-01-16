@@ -16,6 +16,9 @@ public class ItemRepository {
         if (item.getId() == null) {
             em.persist(item);
         } else {
+            //변경하려는 값만 설정하는것이 아니라, 모든 값을 다시 재설정하는것. 의도치 않게 null로 설정 될 수 있음
+            //put과 patch의 차이점과 동일한 것 같다.
+            //merge 말고 JPA의 변경 감지를 사용하는 것이 깔끔
             em.merge(item);
         }
     }
