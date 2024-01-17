@@ -112,4 +112,14 @@ public class OrderRepository {
                         " join fetch o.delivery d", Order.class
         ).getResultList();
     }
+
+    //jpa 는 엔티티나 value object(ex.address) 만 반환할 수 있음. new 키워드 사용해야 해서 더러워짐.
+    public List<OrderSimpleQueryDto> findOrderDtos() {
+        return em.createQuery(
+                "select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
+                        " from Order o" +
+                        " join o.member m" +
+                        " join o.delivery d", OrderSimpleQueryDto.class)
+                .getResultList();
+    }
 }
