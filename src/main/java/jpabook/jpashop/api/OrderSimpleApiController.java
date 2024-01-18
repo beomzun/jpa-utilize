@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * xToOne(ManyToOne, OneToOne) Order Order -> Member Order -> Delivery
+ * xToOne(ManyToOne, OneToOne)
+ * Order
+ * Order -> Member
+ * Order -> Delivery
  */
 @RestController
 @RequiredArgsConstructor
