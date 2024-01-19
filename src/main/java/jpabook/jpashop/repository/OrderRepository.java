@@ -113,4 +113,27 @@ public class OrderRepository {
                         " join fetch o.delivery d", Order.class
         ).getResultList();
     }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                //hibernate6부터는 distinct 자동 적용
+                //1대다 패치조인 할 경우 페이징 처리 불가함 -> OutOfMemory
+                //컬렉션 패치조인은 1개만 사용할 것. 2개 이상에 패치 조인 적용할 시 데이터가 부정합하게 조회될 수 있음
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d" +
+                                " join fetch o.orderItems oi" +
+                                " join fetch oi.item i", Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d", Order.class
+                ).setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }
