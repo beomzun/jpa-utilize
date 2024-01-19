@@ -22,6 +22,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 @Entity
 @Table(name = "orders")
@@ -39,6 +40,7 @@ public class Order {
 
     //cascade_ALL : 모든 엔티티는 각 엔티티마다 persist해서 영속성을 관리.
     //ALL 설정 시  persist(orderItemA),persist(orderItemB)..persist(order) 다 하는 대신 persist(order)만 하면 연쇄적으로 동작
+    // @BatchSize(size = 100)
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 

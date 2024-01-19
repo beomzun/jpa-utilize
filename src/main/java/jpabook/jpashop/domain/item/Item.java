@@ -17,7 +17,9 @@ import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
+@BatchSize(size = 100)
 @Entity
 //상속관계 매핑일 때, 부모클래스에 전략을 지정해야함. 1)SINGLE_TABLE, 2)JOINED, 3)TABLE_PER_CLASS
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

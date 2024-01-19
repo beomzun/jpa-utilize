@@ -10,9 +10,10 @@ spring:
       ddl-auto: create      # 매 애플리케이션 실행 시 db 초기화
     properties:
       hibernate:
-#        show_sql: true
         format_sql: true
+        default_batch_fetch_size: 100 #컬렉션을 지연로딩할 때 in 쿼리를 사용한 최적화를 통해 1+N 문제를 해결.
+    show-sql: true
 
 logging:
   level:
-    org.hibernate.sql: debug    #show_sql 은 sout으로 출력하므로 사용 지양. 운영 측면에서 로그로 보관해야 함
+    org.hibernate.sql: trace    #show_sql 은 sout으로 출력하므로 사용 지양. 운영 측면에서 로그로 보관해야 함
