@@ -45,8 +45,6 @@ public class OrderService {
         orderRepository.save(order);
         return order.getId();
     }
-    //test//test//test제발 하
-
 
     //취소
     @Transactional
