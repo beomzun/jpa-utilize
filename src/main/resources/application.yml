@@ -13,6 +13,7 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100 #컬렉션을 지연로딩할 때 in 쿼리를 사용한 최적화를 통해 1+N 문제를 해결.
     show-sql: true
+#    open-in-view: false  # OSIV : 트랜잭션 종료 시 영속성 컨텍스트 닫고, db connection 반환. 모든 지연로딩을 트랜잭션 안에서 처리해야 하나 커넥션 풀 장애가 발생하지 않음
 
 logging:
   level:
